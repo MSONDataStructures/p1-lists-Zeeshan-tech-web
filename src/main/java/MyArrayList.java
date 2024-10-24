@@ -35,6 +35,7 @@ public class MyArrayList
      */
     public void addLast(Integer item) {
         // TODO: your code goes here
+
     }
 
     /**
@@ -111,6 +112,11 @@ public class MyArrayList
      */
     public boolean contains(Integer item) {
         // TODO: modify the code here
+        for(int i = 0; i < size(); i++){
+            if(list[i] == item){
+                return true;
+            }
+        }
         return false;
     }
 
