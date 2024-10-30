@@ -25,7 +25,6 @@ public class MyArrayList
      */
     public MyArrayList() {
         list = new Integer[10];
-        // TODO: you can add code here
     }
 
     /**
@@ -34,8 +33,7 @@ public class MyArrayList
      * @throws NullPointerException if item is null
      */
     public void addLast(Integer item) {
-        // TODO: your code goes here
-
+        list[size()-1] = item;
     }
 
     /**
@@ -47,7 +45,9 @@ public class MyArrayList
      * @throws NullPointerException if item is null
      */
     public void add(int index, Integer item) {
-        // TODO: your code goes here
+        Integer[] list1;
+        list1 = new Integer[size()];
+        list = list1;
     }
 
     /**
@@ -57,8 +57,13 @@ public class MyArrayList
      * @return the element that was removed from the list
      */
     public Integer remove(int index) {
-        // TODO: modify the code here
-        return null;
+        Integer[] list1;
+        list1 = new Integer[size()-1];
+        for(int i = index; i < size(); i++){
+            list1[i] = list[i+1];
+        }
+        list = list1;
+        return index;
     }
 
     /**
@@ -67,8 +72,7 @@ public class MyArrayList
      * @return the Integer at the specified position in this list
      */
     public Integer get(int index) {
-        // TODO: modify the code here
-        return null;
+        return list[index];
     }
 
     /**
@@ -79,7 +83,7 @@ public class MyArrayList
      * @throws NullPointerException if item is null
      */
     public void set(int index, Integer item) {
-        // TODO: your code goes here
+        list[index] = item;
     }
 
     /**
@@ -87,8 +91,12 @@ public class MyArrayList
      * @return the number of Integers in this list
      */
     public int size() {
-        // TODO: modify the code here
-        return 0;
+        int s;
+        s = 0;
+        while(s < list.length && list[s] != null){
+            s++;
+        }
+        return s;
     }
 
     /**
@@ -100,8 +108,13 @@ public class MyArrayList
      * @throws NullPointerException if item is null
      */
     public int indexOf(Integer item) {
-        // TODO: modify the code here
-        return 0;
+        for(int i = 0; i < size(); i++){
+            if(list[i] == item){
+                return i;
+            }
+        }
+
+        return -1;
     }
 
     /**
@@ -111,7 +124,6 @@ public class MyArrayList
      * @throws NullPointerException if item is null
      */
     public boolean contains(Integer item) {
-        // TODO: modify the code here
         for(int i = 0; i < size(); i++){
             if(list[i] == item){
                 return true;
@@ -125,7 +137,9 @@ public class MyArrayList
      * @post the capacity of the array should not change
      */
     public void clear() {
-        // TODO: your code goes here
+        for(int i = 0; i < size(); i++){
+            list[i] = null;
+        }
     }
 
     /**
@@ -133,7 +147,6 @@ public class MyArrayList
      * @return true if this list is empty
      */
     public boolean isEmpty() {
-        // TODO: modify the code here
-        return false;
+        return size() == 0;
     }
 }
