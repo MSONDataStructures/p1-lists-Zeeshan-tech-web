@@ -33,7 +33,13 @@ public class MyArrayList
      * @throws NullPointerException if item is null
      */
     public void addLast(Integer item) {
-        list[size()-1] = item;
+        Integer[] list1;
+        list1 = new Integer[size()+1];
+        list1[size()] = item;
+        for(int i = 0; i < size(); i++){
+            list1[i] = list[i];
+        }
+        list = list1;
     }
 
     /**
@@ -46,7 +52,10 @@ public class MyArrayList
      */
     public void add(int index, Integer item) {
         Integer[] list1;
-        list1 = new Integer[size()];
+        list1 = new Integer[size()+1];
+        for(int i = index; i < size(); i++){
+            list1[i] = list[i+1];
+        }
         list = list1;
     }
 
