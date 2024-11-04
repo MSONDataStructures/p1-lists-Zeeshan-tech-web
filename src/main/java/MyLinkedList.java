@@ -35,6 +35,11 @@ public class MyLinkedList
         // These fields both default to null.
         public Integer value;
         public Node next;
+
+        public Node(Integer v){
+            value = v;
+            next = null;
+        }
     }
 
     private Node first;
@@ -44,7 +49,6 @@ public class MyLinkedList
      */
     public MyLinkedList() {
         first = null;
-        // TODO: you can add code here
     }
 
     /**
@@ -53,7 +57,12 @@ public class MyLinkedList
      * @throws NullPointerException if item is null
      */
     public void addFirst(Integer item) {
-        // TODO: your code goes here
+        if(item == null){
+            throw new NullPointerException();
+        }
+        Node n = new Node(item);
+        n.next = first;
+        first = n;
     }
 
     /**
@@ -65,7 +74,24 @@ public class MyLinkedList
      * @throws NullPointerException if item is null
      */
     public void add(int index, Integer item) {
-        // TODO: your code goes here
+        if(item == null){
+            throw new NullPointerException();
+        }
+        if(index == size()){
+            index --;
+            int i;
+            i = get(index);
+            add(index,item);
+            set(index+1,item);
+            set(index,i);
+        }
+        Node n = new Node(item);
+        Node c = first;
+        for(int i = 0; i < index; i++) {
+            c = c.next;
+        }
+        n.next = c.next;
+        c.next = n;
     }
 
     /**
@@ -75,8 +101,17 @@ public class MyLinkedList
      * @return the Integer that was removed from the list
      */
     public Integer remove(int index) {
-        // TODO: modify the code here
-        return null;
+        Node c = first;
+        Node n = first;
+        for(int i = 0; i < index-1; i++){
+            c = c.next;
+        }
+        for(int i = 0; i < index; i++){
+            n = n.next;
+        }
+        c.next = n;
+
+        return index;
     }
 
     /**
@@ -85,8 +120,14 @@ public class MyLinkedList
      * @return the Integer at the specified position in this list
      */
     public Integer get(int index) {
-        // TODO: modify the code here
-        return null;
+        Node n = first;
+        if(index == size()-1){
+
+        }
+        for(int i = 0; i < index; i++){
+            n = n.next;
+        }
+        return n.value;
     }
 
     /**
@@ -97,7 +138,14 @@ public class MyLinkedList
      * @throws NullPointerException if item is null
      */
     public void set(int index, Integer item) {
-        // TODO: your code goes here
+        if(item == null){
+            throw new NullPointerException();
+        }
+        Node n = first;
+        for(int i = 0; i < index; i++){
+            n = n.next;
+        }
+        n.value = item;
     }
 
     /**
@@ -105,8 +153,13 @@ public class MyLinkedList
      * @return the number of Integers in this list
      */
     public int size() {
-        // TODO: modify the code here
-        return 0;
+        Node n = first;
+        int s = 0;
+        while(n != null){
+            n = n.next;
+            s++;
+        }
+        return s;
     }
 
     /**
@@ -118,8 +171,27 @@ public class MyLinkedList
      * @throws NullPointerException if item is null
      */
     public int indexOf(Integer item) {
-        // TODO: modify the code here
-        return 0;
+        if(item == null){
+            throw new NullPointerException();
+        }
+        Node n = first;
+        if(n.value == item){
+            return 0;
+        }
+        int s = 0;
+        while(true){
+            if(n == null){
+                return -1;
+            }
+            if(n.value != item) {
+                n = n.next;
+                s++;
+            }
+            else{
+                return s;
+            }
+
+        }
     }
 
     /**
@@ -129,8 +201,10 @@ public class MyLinkedList
      * @throws NullPointerException if item is null
      */
     public boolean contains(Integer item) {
-        // TODO: modify the code here
-        return false;
+        if(item == null){
+            throw new NullPointerException();
+        }
+        return indexOf(item) != -1;
     }
 
     /**
@@ -138,7 +212,12 @@ public class MyLinkedList
      * call returns.
      */
     public void clear() {
-        // TODO: your code goes here
+        Node n = first;
+        n = null;
+        for(int i = 0; i < size(); i++){
+            n.next = null;
+            n = n.next;
+        }
     }
 
     /**
@@ -146,7 +225,6 @@ public class MyLinkedList
      * @return true if this list is empty
      */
     public boolean isEmpty() {
-        // TODO: modify the code here
-        return false;
+        return size() == 0;
     }
 }
