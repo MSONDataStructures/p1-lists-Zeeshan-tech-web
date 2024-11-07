@@ -77,21 +77,19 @@ public class MyLinkedList
         if(item == null){
             throw new NullPointerException();
         }
-        if(index == size()){
-            index --;
-            int i;
-            i = get(index);
-            add(index,item);
-            set(index+1,item);
-            set(index,i);
-        }
         Node n = new Node(item);
-        Node c = first;
-        for(int i = 0; i < index; i++) {
-            c = c.next;
+        if(first == null){
+            first = n;
         }
-        n.next = c.next;
+        Node c = first;
+        for (int i = 0; i < index; i++) {
+            if(c.next != null) {
+                c = c.next;
+            }
+        }
         c.next = n;
+
+
     }
 
     /**
@@ -109,7 +107,7 @@ public class MyLinkedList
         for(int i = 0; i < index; i++){
             n = n.next;
         }
-        c.next = n;
+        c.next = n.next;
 
         return index;
     }
@@ -121,9 +119,6 @@ public class MyLinkedList
      */
     public Integer get(int index) {
         Node n = first;
-        if(index == size()-1){
-
-        }
         for(int i = 0; i < index; i++){
             n = n.next;
         }
