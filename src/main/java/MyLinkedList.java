@@ -43,12 +43,14 @@ public class MyLinkedList
     }
 
     private Node first;
+    private int size;
 
     /**
      * Constructs an empty list.
      */
     public MyLinkedList() {
         first = null;
+        size = 0;
     }
 
     /**
@@ -63,6 +65,7 @@ public class MyLinkedList
         Node n = new Node(item);
         n.next = first;
         first = n;
+        size++;
     }
 
     /**
@@ -79,15 +82,19 @@ public class MyLinkedList
         }
         Node n = new Node(item);
         if(first == null){
-            first = n;
+            n = first;
+        }
+        if(index == 0){
+            addFirst(item);
+            return;
         }
         Node c = first;
-        for (int i = 0; i < index; i++) {
-            if(c.next != null) {
-                c = c.next;
-            }
+        for (int i = 0; i < index-1; i++) {
+            c = c.next;
         }
+        n.next = c.next;
         c.next = n;
+        size++;
 
 
     }
@@ -99,17 +106,33 @@ public class MyLinkedList
      * @return the Integer that was removed from the list
      */
     public Integer remove(int index) {
+        if(index < 0 || index > size){
+            return -1;
+        }
         Node c = first;
-        Node n = first;
-        for(int i = 0; i < index-1; i++){
-            c = c.next;
+        if(index == 0 && c != null){
+            Integer v = c.value;
+            this.first = c.next;
+            size--;
+            return v;
         }
-        for(int i = 0; i < index; i++){
-            n = n.next;
+        else{
+            Node previous = null;
+            int counter = 0;
+            while(c != null){
+                if(counter == index){
+                    Integer v = c.value;
+                    previous.next = c.next;
+                    size--;
+                    return v;
+                }
+                counter++;
+                previous = c;
+                c = c.next;
+            }
+            return -1;
         }
-        c.next = n.next;
 
-        return index;
     }
 
     /**
@@ -148,13 +171,7 @@ public class MyLinkedList
      * @return the number of Integers in this list
      */
     public int size() {
-        Node n = first;
-        int s = 0;
-        while(n != null){
-            n = n.next;
-            s++;
-        }
-        return s;
+        return size;
     }
 
     /**
@@ -207,12 +224,8 @@ public class MyLinkedList
      * call returns.
      */
     public void clear() {
-        Node n = first;
-        n = null;
-        for(int i = 0; i < size(); i++){
-            n.next = null;
-            n = n.next;
-        }
+        first = null;
+        size = 0;
     }
 
     /**
