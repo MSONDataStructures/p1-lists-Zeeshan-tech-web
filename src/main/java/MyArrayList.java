@@ -27,6 +27,13 @@ public class MyArrayList
         list = new Integer[10];
     }
 
+    public void addCapacity(){
+        Integer[] list1;
+        list1 = new Integer[list.length*2];
+        
+
+    }
+
     /**
      * Appends the specified Integer to the <b>end</b> of the list.
      * @param item Integer to be appended to this list
@@ -53,7 +60,7 @@ public class MyArrayList
     public void add(int index, Integer item) {
         Integer[] list1;
         list1 = new Integer[size()+1];
-        for(int i = index; i < size(); i++){
+        for(int i = index; i < size()-1; i++){
             list1[i] = list[i+1];
         }
         list = list1;

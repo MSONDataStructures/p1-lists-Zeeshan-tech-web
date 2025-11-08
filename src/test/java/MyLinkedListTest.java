@@ -115,7 +115,7 @@ public class MyLinkedListTest {
         smallMLL.add(8, 91); // 9, 18, 22, 34, 45, 67, 73, 88, *91*
         smallMLL.add(5, 56); // 9, 18, 22, 34, 45, *56*, 67, 73, 88, 91
 
-        //assertEquals(10, smallMLL.size());
+        assertEquals(10, smallMLL.size());
         assertEquals(9, smallMLL.get(0));
         assertEquals(18, smallMLL.get(1));
         assertEquals(22, smallMLL.get(2));
